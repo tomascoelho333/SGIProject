@@ -1,0 +1,86 @@
+/* General Layout */
+.container {
+  width: 100%;
+  top: 13.611vw;
+  left: 0vw;
+  display: flex; /* key for side-by-side layout */
+  justify-content: center; /* centers the content */
+  align-items: flex-start;
+}
+
+.container div {
+  position: relative;
+}
+
+/* Sidebar for buttons */
+.btn-bar {
+  height: fit-content;
+  display: flex;
+  flex-direction: column; /* Stacks buttons vertically */
+  gap: 5px;
+  margin-right: 2vw; /* Spacing between bar and canvas */
+}
+
+/* Button Styling */
+.button {
+  width: 3.3vw;
+  height: 3.3vw;
+  background-color: white;
+  border: solid 0.278vw #eef0f3;
+  border-radius: 0.278vw;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0%;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #eef0f3;
+}
+
+.button-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Canvas Area */
+.canvas {
+  position: relative;
+}
+
+/* Ensure canvas fits the container logic */
+canvas {
+  width: 35vw;
+  height: 35vw;
+  display: block; /* Removes bottom spacing issues */
+}
+
+/* Slider Styling */
+.slider {
+  width: 35vw;
+  height: 0.972vw;
+  border-radius: 0.972vw;
+  background: #eef0f3;
+  outline: none;
+  transition: opacity 0.2s;
+  margin-top: 1.389vw;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.736vw;
+  height: 1.736vw;
+  border-radius: 1.736vw;
+  background: #e02948;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 1.736vw;
+  height: 1.736vw;
+  border-radius: 1.736vw;
+  background: #e02948;
+  cursor: pointer;
+}
