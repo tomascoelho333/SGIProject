@@ -146,10 +146,40 @@ const intensitySlider = document.getElementById("intensitySlider");
 const intensityMax = document.getElementById("btn_light_on");
 const intensityMin = document.getElementById("btn_light_off");
 
+// Animation buttons, alternative to clicking on the 3D Model
+const btnLid = document.getElementById("btn_lid");
+const btnNeedle = document.getElementById("btn_needle");
+const btnPower = document.getElementById("btn_power");
 
 // Texture buttons
 const btnTexture1 = document.getElementById("btn_texture_1");
 const btnTexture2 = document.getElementById("btn_texture_2");
+
+
+// DustCover
+if (btnLid) {
+    btnLid.addEventListener("click", () => {
+        toggleAnimation("DustCover_Close");
+    });
+}
+
+// Pickup
+if (btnNeedle) {
+    btnNeedle.addEventListener("click", () => {
+        toggleAnimation("PickupPlace");
+    });
+}
+
+// Power
+if (btnPower) {
+    btnPower.addEventListener("click", () => {
+        // Inverte o estado de rotação
+        diskSpinning = !diskSpinning;
+        // Toca a animação do botão a ir para baixo/cima
+        toggleAnimation("ButtonPush"); 
+    });
+}
+
 
 
 // Light Buttons
