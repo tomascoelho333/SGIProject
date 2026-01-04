@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto SGI - Visualizador 3D</title>
+    <title>Gira discos, da lenco</title>
     
     <link rel="stylesheet" href="css/styles.css" />
 
@@ -16,54 +16,140 @@
       }
     </script>
   </head>
-  <body>
-    
-    <div class="container">
+ <body>
+  <header class="site-header">
+    <div class="header-left">
+      <div class="logo">LA REDOUTE</div>
+      <nav class="main-nav">
+        <a href="#">Casa</a>
+        <a href="#">Moda</a>
+      </nav>
+    </div>
+
+    <div class="search-bar-container">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       
-      <div class="btn-bar">
-        <button class="button" id="btn_reset">
-          <img src="img/reset.png" alt="Reset" class="button-img" />
-        </button>
+      <input type="text" class="search-input" value="Gira-discos" disabled>
+      
+      <button class="search-clear">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
 
-        <button class="button" id="btn_front_view">
-          <img src="img/front-view.png" alt="Front" class="button-img" />
-        </button>
+    <div class="header-right">
+      <a href="index.html" class="user-login">
+        <div class="user-icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </div>
+        <span>Entrar / Registar</span>
+      </a>
+    </div>
+  </header>
 
-        <button class="button" id="btn_top_view">
-          <img src="img/top_view.png" alt="Top" class="button-img" />
-        </button>
-
-        <button class="button" id="btn_left_view">
-          <img src="img/left_view.png" alt="Left" class="button-img" />
-        </button>
-
-        <button class="button" id="btn_right_view">
-          <img src="img/right_view.png" alt="Right" class="button-img" />
-        </button>
-
-        <button class="button" id="btn_light_on">
-          <img src="img/light-on.png" alt="Light On" class="button-img" />
-        </button>
-      </div>
-
-      <div class="canvas">
+  <div class="main-wrapper">
+    <div class="product-gallery">
+      <a href="products.html" class="back-btn" aria-label="Voltar">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+  </a>
+      <div class="canvas-container">
         <canvas id="canvas"></canvas>
         
         <div class="slider-container">
-          <input
-            type="range"
-            min="0"
-            max="1"
-            value="0.5"
-            step="0.1"
-            class="slider"
-            id="intensitySlider"
-          />
+          <label>Intensidade da Luz</label>
+          <input type="range" min="0" max="1" value="0.5" step="0.1" class="slider" id="intensitySlider" />
         </div>
       </div>
 
+      <div class="btn-bar">
+        <button class="button" id="btn_reset" title="Reset">
+          <img src="img/reset.png" alt="R" />
+        </button>
+        <button class="button" id="btn_front_view" title="Left">
+          <img src="img/left_view.png" alt="F" />
+        </button>
+        <button class="button" id="btn_top_view" title="Top">
+          <img src="img/top_view.png" alt="T" />
+        </button>
+        <button class="button" id="btn_left_view" title="Rear">
+          <img src="img/right_view.png" alt="E" />
+        </button>
+        <button class="button" id="btn_right_view" title="Front">
+          <img src="img/front-view.png" alt="D" />
+        </button>
+        <div class="divider"></div>
+        <button class="button" id="btn_light_on" title="Light On">
+          <img src="img/light-on.png" alt="L" />
+        </button>
+        <button class="button" id="btn_light_off" title="Light Off">
+          <img src="img/light-off.png" alt="L" />
+        </button>
+        <button class="button" id="btn_texture_1" title="Plastic">
+          <img src="img/texture-1.png" alt="T1" />
+        </button>
+        <button class="button" id="btn_texture_2" title="Carbon">
+          <img src="img/texture-2.png" alt="T2" />
+        </button>
+      </div>
     </div>
 
-    <script type="module" src="scripts/main.js"></script>
-  </body>
+    <div class="product-info">
+      <div class="breadcrumbs">
+        La Redoute / High-Tech / Som / Audio Hifi / <a href="products.html">Gira-discos</a>
+      </div>
+      <div class="brand">LENCO</div>
+      <h1 class="product-title">Gira-discos, da Lenco</h1>
+      <a href="#" class="description-link">Ver descrição</a>
+
+      <div class="selectors">
+        <div class="selector-box">
+          TAMANHO ÚNICO
+        </div>
+      </div>
+      <div class="price-section">
+        <span class="promo-text">Excluído da promoção</span>
+        <div class="price">159.99 €</div>
+      </div>
+
+      <div class="delivery-info">
+        <span class="icon">🚚</span>
+        <div>
+          <strong>Disponível para envio em até 3 dias úteis</strong><br>
+          Entregue pela própria marca.
+        </div>
+      </div>
+
+      <button class="add-to-cart-btn">
+        JUNTAR AO CARRINHO
+        <span class="heart-icon">♡</span>
+      </button>
+
+      <div class="shipping-box">
+        
+        <div class="shipping-row">
+          <span class="icon">🕒</span> 
+          <span>Disponível para envio pela marca</span>
+        </div>
+
+        <div class="shipping-row">
+          <span class="icon">🚚</span> 
+          <span>Entrega em casa</span>
+        </div>
+
+      </div>
+
+      <div class="la-redoute-plus">
+        <div class="lr-header">
+          <strong>Entrega gratuita</strong>
+          <span class="toggle"></span>
+        </div>
+        <p>30 dias de oferta, depois 19,90€/ano</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="scripts/main.js"></script>
+</body>
 </html>

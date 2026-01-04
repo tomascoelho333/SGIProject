@@ -16,6 +16,32 @@ const canvasContainer = document.querySelector('.canvas');
 let canvasWidth = canvasContainer ? canvasContainer.offsetWidth : window.innerWidth * 0.35;
 let canvasHeight = canvasContainer ? canvasContainer.offsetWidth : window.innerWidth * 0.35;
 
+
+// Setup texture
+const textureLoader = new THREE.TextureLoader();
+
+function changeObjectTexture(objectName, imagePath) {
+    if (!gltf) return;
+
+    const object = gltf.scene.getObjectByName(objectName);
+
+    if (object) {
+        // new texture
+        textureLoader.load(imagePath, (texture) => {
+            
+            texture.colorSpace = THREE.SRGBColorSpace; 
+            texture.flipY = false;
+            object.material.map = texture;
+            object.material.needsUpdate = true;
+            
+            console.log(`Texture Applied to ${objectName}`);
+        });
+    } else {
+        console.error("Error loading texture");
+    }
+}
+
+
 // Camera
 const camera = new THREE.PerspectiveCamera(
   45,
@@ -60,12 +86,21 @@ const toggles = {};
 let diskSpinning = false;
 let diskObject = null;
 
+// Helper var to get the default texture
+let originalBaseTexture = null;
+
+
 loader.load("../models/RecordPlayer.glb", (loadedGLTF) => {
     gltf = loadedGLTF;
     scene.add(gltf.scene);
 
     // Augment model
-    gltf.scene.scale.set(5, 5, 5);
+    gltf.scene.scale.set(4, 4, 4);
+
+    const baseObject = gltf.scene.getObjectByName("Base");
+
+    //default texture
+    originalBaseTexture = baseObject.material.map;
 
     gltf.scene.traverse((node) => {
         if (node.isMesh) {
@@ -108,6 +143,41 @@ const btnTop = document.getElementById("btn_top_view");
 const btnLeft = document.getElementById("btn_left_view");
 const btnRight = document.getElementById("btn_right_view");
 const intensitySlider = document.getElementById("intensitySlider");
+const intensityMax = document.getElementById("btn_light_on");
+const intensityMin = document.getElementById("btn_light_off");
+
+
+// Texture buttons
+const btnTexture1 = document.getElementById("btn_texture_1");
+const btnTexture2 = document.getElementById("btn_texture_2");
+
+
+// Light Buttons
+if (intensityMin) {
+    intensityMin.addEventListener("click", () => {
+        ambientLight.intensity = 0;
+    });
+}
+
+
+if (intensityMax) {
+    intensityMax.addEventListener("click", () => {
+        ambientLight.intensity = 1;
+    });
+}
+
+// Texture methods
+if (btnTexture1) {
+    btnTexture1.addEventListener("click", () => {
+        changeObjectTexture("Base", "models/materials/plastic.png"); 
+    });
+}
+
+if (btnTexture2) {
+    btnTexture2.addEventListener("click", () => {
+        changeObjectTexture("Base", "models/materials/carbon.png");
+    });
+}
 
 btnReset?.addEventListener("click", resetScene);
 btnFront?.addEventListener("click", () => moveCamera(0, 3, 4));
@@ -117,6 +187,7 @@ btnRight?.addEventListener("click", () => moveCamera(5, 3, 0));
 
 intensitySlider?.addEventListener("input", (e) => {
     ambientLight.intensity = parseFloat(e.target.value);
+    //console.log(ambientLight.intensity);
 });
 
 const raycaster = new THREE.Raycaster();
@@ -172,6 +243,8 @@ function moveCamera(x, y, z) {
 }
 
 function resetScene() {
+    const baseObject = gltf.scene.getObjectByName("Base");
+    baseObject.material.map = originalBaseTexture;
     moveCamera(0, 3, 4);
     ambientLight.intensity = 0.5;
     if (intensitySlider) intensitySlider.value = 0.5;
